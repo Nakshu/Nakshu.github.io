@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nakshatra Agarwal | Data Analyst</title>
+<meta name="description" content="Data Analyst portfolio: Python, SQL, Snowflake, dbt, Tableau, PySpark, R, AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E17;
+    --bg-raised:#121828;
+    --bg-raised-2:#161D31;
+    --hair:#232B42;
+    --ink:#ECEFF8;
+    --ink-soft:#8B93AD;
+    --blue:#3B82F6;
+    --violet:#8B5CF6;
+    --cyan:#22D3EE;
+    --amber:#FBBF24;
+
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+
+    --maxw:1120px;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img,svg{display:block;}
+  ::selection{background:var(--blue); color:#fff;}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* background texture: faint graph grid, only in hero */
+  .grid-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--hair) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+            mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+    opacity:.55;
+  }
+  .glow{
+    position:absolute; top:-180px; left:50%; translate:-50% 0;
+    width:900px; height:520px;
+    background:radial-gradient(ellipse at center, rgba(59,130,246,.28), rgba(139,92,246,.16) 45%, transparent 72%);
+    filter:blur(10px);
+    pointer-events:none;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,14,23,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-size:14px; font-weight:500;
+    text-decoration:none; color:var(--ink);
+    display:flex; align-items:center; gap:9px;
+  }
+  .nav-mark .pulse{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 0 0 rgba(34,211,238,.6);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(34,211,238,.55);}
+    70%{box-shadow:0 0 0 8px rgba(34,211,238,0);}
+    100%{box-shadow:0 0 0 0 rgba(34,211,238,0);}
+  }
+  nav.nav-links{display:flex; gap:30px; font-family:var(--mono); font-size:13px;}
+  nav.nav-links a{text-decoration:none; color:var(--ink-soft); transition:color .15s ease;}
+  nav.nav-links a:hover{color:var(--cyan);}
+  .nav-toggle{display:none;}
+
+  @media (max-width:680px){
+    nav.nav-links{
+      position:fixed; inset:57px 0 auto 0;
+      background:var(--bg-raised);
+      border-bottom:1px solid var(--hair);
+      flex-direction:column; padding:20px 32px 24px; gap:16px;
+      transform:translateY(-140%); transition:transform .25s ease;
+    }
+    nav.nav-links.open{transform:translateY(0);}
+    .nav-toggle{
+      display:inline-flex; background:none; border:1px solid var(--hair);
+      border-radius:8px; padding:7px 11px; font-family:var(--mono);
+      font-size:12px; cursor:pointer; color:var(--ink);
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; padding:104px 0 70px; overflow:hidden;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--cyan);
+    display:flex; align-items:center; gap:10px; margin:0 0 20px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1.5px; background:var(--cyan); display:inline-block;}
+
+  h1.hero-title{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(48px,8vw,88px); line-height:1.02; letter-spacing:-.01em;
+    margin:0 0 24px;
+    background:linear-gradient(100deg, var(--ink) 30%, var(--blue) 68%, var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  p.hero-sub{
+    font-size:clamp(16px,2vw,18.5px); color:var(--ink-soft);
+    max-width:620px; margin:0 0 40px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; text-decoration:none;
+    padding:13px 22px; border-radius:10px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg, var(--blue), var(--violet));
+    color:#fff; box-shadow:0 0 0 1px rgba(255,255,255,.06) inset;
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(59,130,246,.35);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--hair);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+
+  /* colorful industry/domain tags, shown in the hero */
+  .domain-strip{
+    display:flex; flex-wrap:wrap; gap:10px; max-width:760px;
+  }
+  .dtag{
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    padding:9px 16px; border-radius:999px;
+    border:1.5px solid transparent;
+    backdrop-filter:blur(6px);
+  }
+  .dtag-1{color:var(--blue);   background:rgba(59,130,246,.12);  border-color:rgba(59,130,246,.35);}
+  .dtag-2{color:var(--violet); background:rgba(139,92,246,.12);  border-color:rgba(139,92,246,.35);}
+  .dtag-3{color:var(--cyan);   background:rgba(34,211,238,.12);  border-color:rgba(34,211,238,.35);}
+  .dtag-4{color:var(--amber);  background:rgba(251,191,36,.12);  border-color:rgba(251,191,36,.35);}
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:68px 0; position:relative;}
+  section + section{border-top:1px solid var(--hair);}
+  h2.section-title{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(26px,3.4vw,34px); margin:0 0 30px; color:var(--ink);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-text{font-size:17px; color:var(--ink-soft); max-width:700px;}
+  .about-text p{margin:0 0 18px;}
+  .about-text strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:16px;
+  }
+  .skill-card{
+    background:var(--bg-raised);
+    border:1px solid var(--hair);
+    border-left:3px solid var(--blue);
+    border-radius:12px;
+    padding:20px 22px;
+  }
+  .skill-card:nth-child(1){border-left-color:var(--blue);}
+  .skill-card:nth-child(2){border-left-color:var(--violet);}
+  .skill-card:nth-child(3){border-left-color:var(--cyan);}
+  .skill-card:nth-child(4){border-left-color:var(--amber);}
+  .skill-card-label{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-soft); margin:0 0 14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .skill-card-label svg{width:15px; height:15px; flex-shrink:0;}
+  .skill-card:nth-child(1) .skill-card-label svg{color:var(--blue);}
+  .skill-card:nth-child(2) .skill-card-label svg{color:var(--violet);}
+  .skill-card:nth-child(3) .skill-card-label svg{color:var(--cyan);}
+  .skill-card:nth-child(4) .skill-card-label svg{color:var(--amber);}
+  .skill-tags{display:flex; flex-wrap:wrap; gap:7px;}
+  .skill-tag{
+    font-family:var(--mono); font-size:12.5px;
+    color:var(--ink); background:var(--bg-raised-2);
+    border:1px solid var(--hair);
+    padding:6px 11px; border-radius:7px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(310px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--bg-raised);
+    border:1px solid var(--hair);
+    border-radius:var(--radius);
+    padding:26px;
+    display:flex; flex-direction:column; gap:16px;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:var(--hair);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  .card-head{display:flex; align-items:flex-start; justify-content:space-between; gap:14px;}
+  .card h3{font-family:var(--display); font-size:18.5px; margin:0; font-weight:600; max-width:180px;}
+  .card p.desc{font-size:14px; color:var(--ink-soft); margin:0;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:10.5px; color:var(--ink-soft);
+    background:var(--bg-raised-2); border:1px solid var(--hair);
+    border-radius:6px; padding:4px 8px;
+  }
+  .card-link{
+    font-family:var(--mono); font-size:13px; text-decoration:none; color:var(--ink);
+    display:inline-flex; align-items:center; gap:6px; margin-top:2px;
+  }
+  .card-link svg{width:14px; height:14px;}
+  .c1 .card-link:hover{color:var(--blue);}
+  .c2 .card-link:hover{color:var(--violet);}
+  .c3 .card-link:hover{color:var(--cyan);}
+  .c4 .card-link:hover{color:var(--amber);}
+  .c5 .card-link:hover{color:var(--blue);}
+
+  /* ---------- FUN EXPLORATIONS ---------- */
+  .fun-section{padding-top:44px; padding-bottom:44px;}
+  .fun-intro{
+    font-size:17px; color:var(--ink-soft); margin:0 0 30px; max-width:700px;
+  }
+  .fun-grid .card{padding:20px;}
+  .fun-grid .card h3{font-size:16.5px;}
+
+  .stat-caption{font-family:var(--mono); font-size:11px; color:var(--ink-soft); margin-top:-8px;}
+  .stat-caption b{color:var(--ink);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-links{display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;}
+  .contact-pill{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:var(--mono); font-size:13.5px; text-decoration:none; color:var(--ink);
+    background:var(--bg-raised); border:1.5px solid var(--hair);
+    border-radius:999px; padding:11px 18px;
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .contact-pill:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+  .contact-pill svg{width:16px; height:16px;}
+
+  footer{
+    padding:36px 0 60px; font-family:var(--mono); font-size:12px; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .nav-mark .pulse{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark"><span class="pulse"></span>nakshatra.dev</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative;">
+      <h1 class="hero-title">Nakshatra Agarwal</h1>
+      <p class="hero-sub">Data professional with experience in business intelligence, analytics engineering, and reporting. I build practical dashboards, models, and pipelines that help teams understand performance and act with confidence.</p>
+
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View projects →</a>
+      </div>
+
+      <div class="domain-strip" aria-label="Industries I work across">
+        <span class="dtag dtag-1">Healthcare Analytics</span>
+        <span class="dtag dtag-2">Business Intelligence (BI)</span>
+        <span class="dtag dtag-3">Management Consulting</span>
+        <span class="dtag dtag-4">Financial Services (Fintech)</span>
+        <span class="dtag dtag-1">E-commerce &amp; Retail Tech</span>
+        <span class="dtag dtag-2">Supply Chain &amp; Logistics</span>
+        <span class="dtag dtag-3">Marketing Tech (MarTech)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <p class="eyebrow">About</p>
+    <h2 class="section-title">What I actually do</h2>
+    <div class="about-text">
+      <p>I turn raw, unstructured data into answers people actually act on: cleaning it, modeling it, and building dashboards that let teams self-serve instead of waiting on me for every number.</p>
+      <p>My daily toolkit is <strong>Python and SQL</strong>, with <strong>Snowflake and dbt</strong> for warehousing and modeling, and <strong>Tableau</strong> for the storytelling part. I've built compliance dashboards, run A/B tests, untangled a metric definition mess that had five teams reporting five different numbers, and turned raw transaction data into something people could actually query themselves.</p>
+      <p>I build side projects to stay sharp on tools I haven't used on the job yet, like forecasting models, data pipelines, and the occasional argument with a stubborn dataset. All of it is below and on GitHub.</p>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <p class="eyebrow">Toolkit</p>
+    <h2 class="section-title">Skills</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <p class="skill-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 14 15 20 7"/><polyline points="14 7 20 7 20 13"/></svg>
+          Languages
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <p class="skill-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          Data & Warehousing
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Snowflake</span>
+          <span class="skill-tag">dbt</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Databricks</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">Great Expectations</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <p class="skill-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6 1.5A4 4 0 0 0 6 19h11.5Z"/></svg>
+          Cloud
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS S3</span>
+          <span class="skill-tag">Lambda</span>
+          <span class="skill-tag">DynamoDB</span>
+          <span class="skill-tag">SNS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <p class="skill-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          BI, Visualization & Analysis
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">A/B Testing</span>
+          <span class="skill-tag">Time Series Forecasting</span>
+          <span class="skill-tag">Statistical Analysis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <p class="eyebrow">Selected work</p>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+
+      <div class="card c1">
+        <div class="card-head">
+          <h3>Credit Card Transaction Pipeline</h3>
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#232B42" stroke-width="7"/>
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#3B82F6" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4 163.4" stroke-dashoffset="0" transform="rotate(-90 32 32)"/>
+            <text x="32" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#ECEFF8" font-weight="600">100%</text>
+          </svg>
+        </div>
+        <p class="desc">End-to-end analytics engineering pipeline: PySpark for distributed cleaning and feature engineering, Snowflake + dbt for warehouse modeling, Great Expectations for automated data quality.</p>
+        <p class="stat-caption"><b>13/13</b> quality checks passed · <b>49,011</b> clean rows processed</p>
+        <div class="tag-row">
+          <span class="tag">PySpark</span><span class="tag">Snowflake</span><span class="tag">dbt</span><span class="tag">Great Expectations</span>
+        </div>
+        <a class="card-link" href="https://github.com/Nakshu/credit-card-transaction-pipeline" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Code on GitHub
+        </a>
+      </div>
+
+      <div class="card c2">
+        <div class="card-head">
+          <h3>Retail Demand Forecasting (R)</h3>
+          <svg width="72" height="56" viewBox="0 0 72 56" aria-hidden="true">
+            <line x1="0" y1="52" x2="72" y2="52" stroke="#232B42" stroke-width="1"/>
+            <rect x="2"  y="14" width="10" height="38" rx="2" fill="#8B5CF6" opacity=".55"/>
+            <rect x="16" y="10" width="10" height="42" rx="2" fill="#8B5CF6" opacity=".7"/>
+            <rect x="30" y="16" width="10" height="36" rx="2" fill="#8B5CF6" opacity=".55"/>
+            <rect x="44" y="26" width="10" height="26" rx="2" fill="#8B5CF6" opacity=".4"/>
+            <rect x="58" y="15" width="10" height="37" rx="2" fill="#8B5CF6" opacity=".65"/>
+          </svg>
+        </div>
+        <p class="desc">Time series forecasting across 5 stores comparing ARIMA and ETS models, plus hypothesis testing to quantify the real effect of promotions on sales.</p>
+        <p class="stat-caption"><b>76.55%</b> avg forecast accuracy · <b>+592.9</b> units/day promo lift (p&lt;0.001)</p>
+        <div class="tag-row">
+          <span class="tag">R</span><span class="tag">ARIMA</span><span class="tag">ETS</span><span class="tag">Hypothesis Testing</span>
+        </div>
+        <a class="card-link" href="https://github.com/Nakshu/retail-demand-forecasting" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Code on GitHub
+        </a>
+      </div>
+
+      <div class="card c3">
+        <div class="card-head">
+          <h3>AWS Inventory ETL Pipeline</h3>
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#232B42" stroke-width="7"/>
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" stroke-dasharray="158.7 163.4" stroke-dashoffset="0" transform="rotate(-90 32 32)"/>
+            <text x="32" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#ECEFF8" font-weight="600">97.2%</text>
+          </svg>
+        </div>
+        <p class="desc">Event-driven pipeline on S3, Lambda, DynamoDB, and SNS that cleans inventory data and fires low-stock alerts. Fully tested locally with moto, at zero AWS cost.</p>
+        <p class="stat-caption"><b>785/808</b> rows cleaned · <b>132</b> low-stock alerts correctly triggered</p>
+        <div class="tag-row">
+          <span class="tag">AWS Lambda</span><span class="tag">DynamoDB</span><span class="tag">S3</span><span class="tag">SNS</span>
+        </div>
+        <a class="card-link" href="https://github.com/Nakshu/aws-inventory-etl" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Code on GitHub
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="fun" class="wrap fun-section">
+    <p class="eyebrow">Early explorations</p>
+    <h2 class="section-title">Fun Explorations</h2>
+    <p class="fun-intro">A couple of earlier, more academic projects, kept separate from the professional work above.</p>
+
+    <div class="projects-grid fun-grid">
+
+      <div class="card c4">
+        <div class="card-head">
+          <h3>Movie Script Analysis</h3>
+          <svg width="72" height="56" viewBox="0 0 72 56" aria-hidden="true">
+            <line x1="0" y1="52" x2="72" y2="52" stroke="#232B42" stroke-width="1"/>
+            <rect x="2"  y="30" width="10" height="22" rx="2" fill="#FBBF24" opacity=".55"/>
+            <rect x="16" y="8"  width="10" height="44" rx="2" fill="#FBBF24" opacity=".8"/>
+            <rect x="30" y="22" width="10" height="30" rx="2" fill="#FBBF24" opacity=".6"/>
+            <rect x="44" y="34" width="10" height="18" rx="2" fill="#FBBF24" opacity=".45"/>
+            <rect x="58" y="16" width="10" height="36" rx="2" fill="#FBBF24" opacity=".7"/>
+          </svg>
+        </div>
+        <p class="desc">Statistical and sentiment analysis of a feature film, with review data scraped from IMDB and Rotten Tomatoes and weighted by each character's impact on audience response.</p>
+        <p class="stat-caption">Web-scraped reviews · Character-level <b>sentiment scoring</b></p>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Web Scraping</span><span class="tag">Sentiment Analysis</span><span class="tag">Statistics</span>
+        </div>
+        <a class="card-link" href="https://github.com/Nakshu/Movie-Script-Analysis" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Code on GitHub
+        </a>
+      </div>
+
+      <div class="card c5">
+        <div class="card-head">
+          <h3>Cell Tracking Challenge</h3>
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#232B42" stroke-width="7"/>
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#3B82F6" stroke-width="7" stroke-linecap="round" stroke-dasharray="160.5 163.4" stroke-dashoffset="0" transform="rotate(-90 32 32)"/>
+            <text x="32" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" fill="#ECEFF8" font-weight="600">98.3%</text>
+          </svg>
+        </div>
+        <p class="desc">Built a Support Vector Machine model for automated cell segmentation and tracking, presented as a final research paper with training and held-out challenge set results.</p>
+        <p class="stat-caption"><b>98.27%</b> training accuracy · <b>50%</b> less manual segmentation effort</p>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">SVM</span><span class="tag">Machine Learning</span><span class="tag">Image Segmentation</span>
+        </div>
+        <a class="card-link" href="https://github.com/Nakshu/Cell-Tracking-Challenge" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Code on GitHub
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="section-title">Let's talk data</h2>
+    <p class="about-text" style="margin-bottom:0;">Open to Data Analyst, Business Analyst, and Data Analytics Engineer roles. If you've got a dashboard nobody trusts or a metric with five different definitions, I'm probably the right person to bother about it.</p>
+
+    <div class="contact-links">
+      <a class="contact-pill" href="mailto:nakshatraagarwal2812@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6" /><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        Email
+      </a>
+      <a class="contact-pill" href="https://www.linkedin.com/in/nakshatra-agarwal" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C3.34 3.5 2 4.84 2 6.48s1.34 2.98 2.98 2.98 2.98-1.34 2.98-2.98S6.62 3.5 4.98 3.5ZM2.4 21.5h5.16V8.75H2.4V21.5ZM9.5 8.75h4.94v1.74h.07c.69-1.3 2.37-2.68 4.88-2.68 5.22 0 6.18 3.44 6.18 7.91v8.78h-5.16v-7.78c0-1.86-.03-4.25-2.59-4.25-2.6 0-3 2.03-3 4.11v7.92H9.5V8.75Z"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-pill" href="https://github.com/Nakshu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Nakshatra Agarwal</span>
+  <span>Built with HTML, CSS, and a little too much Masala Chai.</span>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
